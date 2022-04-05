@@ -26,9 +26,12 @@ const mergeSort = (array, start, end, auxArray, animations) => {
   let j = midPoint + 1;
 
   while(i <= midPoint && j <= end){
+    //change color to red start to change
     animations.push([i, j]);
+    //change color back to turqouise
     animations.push([i, j]);
     if(auxArray[i] <= auxArray[j]){
+      // actual swap
       animations.push([s, auxArray[i]]);
       array[s] = auxArray[i];
       s++;
