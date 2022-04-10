@@ -3,9 +3,9 @@ import './Sorting.css';
 import {getMergeAnimation} from './algorithms/mergeSort.jsx';
 import {getBubbleAnimation} from './algorithms/bubbleSort.jsx';
 import {getHeapAnimation} from './algorithms/heapSort.jsx';
-// import {getQuickAnimation} from './algorithms/mergeSort.jsx';
+import {getQuickAnimation} from './algorithms/quickSort.jsx';
 
-const ANIMATION_SPEED_MS = 1;
+const ANIMATION_SPEED_MS = 5;
 const COLOR = 'turquoise';
 const SECONDARY_COLOR = 'red';
 
@@ -115,6 +115,36 @@ function Sorting() {
   }
 
   function quick() {
+    console.log("not sorted " + sortArray);
+    const animations = getQuickAnimation(sortArray);
+    console.log("sorted " + sortArray);
+
+    for(let i=0; i<animations.length; i++){
+      const bars = document.getElementsByClassName('bar');
+      const changeColor = i % 3 !== 2;
+      if(changeColor){
+        const [firstBarIdx, secondBarIdx] = animations[i];
+        const color = i % 3 === 0 ? SECONDARY_COLOR : COLOR;
+        setTimeout(() => {
+          bars[firstBarIdx].style.backgroundColor = color;
+          bars[secondBarIdx].style.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      }
+      else{
+        setTimeout(() => {
+
+          const [firstBarIdx, secondBarIdx, height] = animations[i];
+          if(height != parseInt(bars[firstBarIdx].style.height, 10)){
+            bars[secondBarIdx].style.height = bars[firstBarIdx].style.height;
+            bars[firstBarIdx].style.height = `${height}px`;
+          }
+
+
+        }, i * ANIMATION_SPEED_MS);
+
+      }
+    }
+
 
   }
 
@@ -135,6 +165,7 @@ function Sorting() {
       <button onClick={() => merge()}>Merge Sort</button>
       <button onClick={() => bubble()}> Bubble Sort </button>
       <button onClick={() => heap()}> Heap Sort </button>
+      <button onClick={() => quick()}> Quick Sort </button>
 
     </div>
 
