@@ -6,7 +6,8 @@
 
 
 .bar {
-  width: 2px;
+  width: 5px;
+  border-radius: 30px;
   display: inline-block;
   margin: 0 1px;
 }
